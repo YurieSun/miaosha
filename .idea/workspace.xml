@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3295a8d4-db08-460c-9b3c-90113f368585" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1aLtCbypMvxvhKcQPiXZCOfscSK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager" selected="Application.App">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.yurie.miaosha.App" />
+      <module name="miaosha" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.yurie.miaosha.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="mybatis-generator" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="mybatis-generator:generate" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="Maven.mybatis-generator" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3295a8d4-db08-460c-9b3c-90113f368585" name="Default Changelist" comment="" />
+      <created>1586526574513</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586526574513</updated>
+      <workItem from="1586526577094" duration="4224000" />
+      <workItem from="1587029620069" duration="25542000" />
+      <workItem from="1587217612938" duration="9737000" />
+      <workItem from="1587383842319" duration="10352000" />
+      <workItem from="1587396700517" duration="3744000" />
+      <workItem from="1587469267550" duration="6892000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587387441336">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1587387441336" />
+    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1587391273446">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1587391273446" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1587261740189">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587261740189" />
+    <state width="1323" height="123" key="GridCell.Tab.0.bottom" timestamp="1587478701625">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="123" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587478701625" />
+    <state width="1323" height="123" key="GridCell.Tab.0.center" timestamp="1587478701623">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="123" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587478701623" />
+    <state width="1323" height="123" key="GridCell.Tab.0.left" timestamp="1587478701620">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="123" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587478701620" />
+    <state width="1323" height="123" key="GridCell.Tab.0.right" timestamp="1587478701623">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="123" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587478701623" />
+    <state width="1323" height="192" key="GridCell.Tab.1.bottom" timestamp="1587474502847">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="192" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587474502847" />
+    <state width="1323" height="192" key="GridCell.Tab.1.center" timestamp="1587474502847">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="192" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1587474502847" />
+    <state width="1323" height="192" key="GridCell.Tab.1.left" timestamp="1587474502847">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="192" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1587474502847" />
+    <state width="1323" height="192" key="GridCell.Tab.1.right" timestamp="1587474502847">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="192" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1587474502847" />
+    <state x="163" y="0" key="SettingsEditor" timestamp="1587038919797">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1587038919797" />
+    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1587400601012">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1587400601012" />
+    <state x="384" y="0" key="refactoring.ChangeSignatureDialog" timestamp="1587200848992">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="384" y="0" key="refactoring.ChangeSignatureDialog/0.0.1366.728@0.0.1366.728" timestamp="1587200848992" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1587472068095">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1587472068095" />
+  </component>
+</project>
