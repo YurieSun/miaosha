@@ -1,6 +1,7 @@
 package com.yurie.miaosha.dao;
 
 import com.yurie.miaosha.dataobject.ItemDO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -54,4 +55,6 @@ public interface ItemDOMapper {
      * @mbg.generated Tue Apr 21 20:45:52 CST 2020
      */
     int updateByPrimaryKey(ItemDO record);
+
+    int increaseSales(@Param("itemId") Integer itemId, @Param("amount") Integer amount);
 }

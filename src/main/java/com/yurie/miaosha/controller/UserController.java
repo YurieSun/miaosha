@@ -41,7 +41,7 @@ public class UserController extends BaseController {
         // 校验用户登陆是否合法
         UserModel userModel = userService.validateLogin(telphone, EncodeByMD5(password));
         // 将用户凭证加入到用户登陆成功的session内
-        httpServletRequest.getSession().setAttribute("IS_LOGIN", "true");
+        httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
         httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
         return CommonReturnType.create(null);
     }

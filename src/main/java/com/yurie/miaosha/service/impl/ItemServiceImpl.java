@@ -73,6 +73,28 @@ public class ItemServiceImpl implements ItemService {
         return itemModelList;
     }
 
+    @Override
+    @Transactional
+    public boolean decreaseStock(Integer itemId, Integer amount) throws BusinessException {
+        // 这里的sql语句传回来的是所影响的行数，根据是否为0可以判断是否成功。
+        // 而采用“for update的sql语句先锁住库存并和amount进行比较，看下是否够扣，如果够再进行更新”的方案，
+        // 需要两条sql语句，效率会低一点。
+        int affectedRows = itemStockDOMapper.decreaseStock(itemId, amount);
+        if (affectedRows > 0) {
+            // 扣减库存成功
+            return true;
+        } else {
+            // 扣减库存失败
+            return false;
+        }
+    }
+
+    @Override
+    @Transactional
+    public void increaseSales(Integer itemId, Integer amount) throws BusinessException {
+        itemDOMapper.increaseSales(itemId, amount);
+    }
+
     // itemModel->itemDO
     private ItemDO convertItemDOFromItemModel(ItemModel itemModel) {
         if (itemModel == null) {
