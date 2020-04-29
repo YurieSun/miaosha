@@ -7,7 +7,9 @@ import com.yurie.miaosha.dataobject.ItemStockDO;
 import com.yurie.miaosha.error.BusinessException;
 import com.yurie.miaosha.error.EmBusinessError;
 import com.yurie.miaosha.service.ItemService;
+import com.yurie.miaosha.service.PromoService;
 import com.yurie.miaosha.service.model.ItemModel;
+import com.yurie.miaosha.service.model.PromoModel;
 import com.yurie.miaosha.validator.ValidationImpl;
 import com.yurie.miaosha.validator.ValidationResult;
 import org.springframework.beans.BeanUtils;
@@ -27,6 +29,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemStockDOMapper itemStockDOMapper;
+
+    @Autowired
+    private PromoService promoService;
 
     @Autowired
     private ValidationImpl validator;
@@ -59,6 +64,11 @@ public class ItemServiceImpl implements ItemService {
         }
         ItemStockDO itemStockDO = itemStockDOMapper.selectByItemId(itemDO.getId());
         ItemModel itemModel = covertItemModelFromItemDO(itemDO, itemStockDO);
+        // 获取秒杀活动
+        PromoModel promoModel = promoService.getPromoByItemId(itemModel.getId());
+        if (promoModel != null && promoModel.getStatus() != 3) {
+            itemModel.setPromoModel(promoModel);
+        }
         return itemModel;
     }
 

@@ -5,6 +5,7 @@ import com.yurie.miaosha.error.BusinessException;
 import com.yurie.miaosha.response.CommonReturnType;
 import com.yurie.miaosha.service.ItemService;
 import com.yurie.miaosha.service.model.ItemModel;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,6 +70,14 @@ public class ItemController extends BaseController {
         }
         ItemVO itemVO = new ItemVO();
         BeanUtils.copyProperties(itemModel, itemVO);
+        if (itemModel.getPromoModel() != null) {
+            itemVO.setPromoId(itemModel.getPromoModel().getId());
+            itemVO.setStartDate(itemModel.getPromoModel().getStartDate().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
+            itemVO.setPromoPrice(itemModel.getPromoModel().getPromoItemPrice());
+            itemVO.setPromoStatus(itemModel.getPromoModel().getStatus());
+        } else {
+            itemVO.setPromoStatus(0);
+        }
         return itemVO;
     }
 }
