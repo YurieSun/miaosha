@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3295a8d4-db08-460c-9b3c-90113f368585" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yurie/miaosha/config/WebServerConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/miaosha.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/META-INF/miaosha.kotlin_module" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +136,7 @@
       <workItem from="1588163204866" duration="7818000" />
       <workItem from="1588301693051" duration="808000" />
       <workItem from="1588302974594" duration="4240000" />
-      <workItem from="1588469609391" duration="3721000" />
+      <workItem from="1588469609391" duration="5202000" />
     </task>
     <servers />
   </component>
@@ -156,10 +151,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1587387441336" />
-    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1588086024221">
+    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1588601566287">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1588086024221" />
+    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1588601566287" />
     <state x="363" y="99" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1588302365042">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -168,22 +163,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1588469683074" />
-    <state width="1323" height="185" key="GridCell.Tab.0.bottom" timestamp="1588600584145">
+    <state width="1323" height="185" key="GridCell.Tab.0.bottom" timestamp="1588601165575">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588600584145" />
-    <state width="1323" height="185" key="GridCell.Tab.0.center" timestamp="1588600584145">
+    <state width="1323" height="185" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588601165575" />
+    <state width="1323" height="185" key="GridCell.Tab.0.center" timestamp="1588601165574">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1588600584145" />
-    <state width="1323" height="185" key="GridCell.Tab.0.left" timestamp="1588600584145">
+    <state width="1323" height="185" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1588601165574" />
+    <state width="1323" height="185" key="GridCell.Tab.0.left" timestamp="1588601165573">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1588600584145" />
-    <state width="1323" height="185" key="GridCell.Tab.0.right" timestamp="1588600584145">
+    <state width="1323" height="185" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1588601165573" />
+    <state width="1323" height="185" key="GridCell.Tab.0.right" timestamp="1588601165574">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1588600584145" />
+    <state width="1323" height="185" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1588601165574" />
     <state width="1323" height="205" key="GridCell.Tab.1.bottom" timestamp="1588252133474">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -216,10 +211,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="384" y="0" key="refactoring.ChangeSignatureDialog/0.0.1366.728@0.0.1366.728" timestamp="1587200848992" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1588251484146">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1588601682803">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1588251484146" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1588601682803" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
