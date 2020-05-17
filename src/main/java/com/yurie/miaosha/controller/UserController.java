@@ -9,6 +9,9 @@ import com.yurie.miaosha.service.UserService;
 import com.yurie.miaosha.service.model.UserModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sun.misc.BASE64Encoder;
@@ -18,6 +21,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Controller("user")
 @RequestMapping("/user")
@@ -28,6 +33,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private HttpServletRequest httpServletRequest;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     // 用户登陆接口
     @RequestMapping(value = "/login", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
@@ -41,9 +49,17 @@ public class UserController extends BaseController {
         // 校验用户登陆是否合法
         UserModel userModel = userService.validateLogin(telphone, EncodeByMD5(password));
         // 将用户凭证加入到用户登陆成功的session内
-        httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
-        httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
-        return CommonReturnType.create(null);
+        //httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
+        //httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
+
+        // 使用UUID生成登陆凭证token
+        String uuidToken = UUID.randomUUID().toString().replace("-", "");
+        // 存入redis
+        redisTemplate.opsForValue().set(uuidToken, userModel);
+        redisTemplate.expire(uuidToken, 1, TimeUnit.HOURS);
+
+        // 下发token
+        return CommonReturnType.create(uuidToken);
     }
 
     // 用户注册接口
