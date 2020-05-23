@@ -1,7 +1,8 @@
-package com.yurie.miaosha.service;
+package com.yurie.miaosha.service.impl;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.yurie.miaosha.service.CacheService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

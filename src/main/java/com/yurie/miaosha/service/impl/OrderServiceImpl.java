@@ -12,7 +12,6 @@ import com.yurie.miaosha.service.PromoService;
 import com.yurie.miaosha.service.UserService;
 import com.yurie.miaosha.service.model.ItemModel;
 import com.yurie.miaosha.service.model.OrderModel;
-import com.yurie.miaosha.service.model.PromoModel;
 import com.yurie.miaosha.service.model.UserModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,11 +49,13 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderModel createOrder(Integer userId, Integer itemId, Integer promoId, Integer amount) throws BusinessException {
         // 1. 校验下单状态：商品是否存在，用户是否存在，数量是否正确，秒杀活动是否合法
-        ItemModel itemModel = itemService.getItemById(itemId);
+        //ItemModel itemModel = itemService.getItemById(itemId);
+        ItemModel itemModel = itemService.getItemByIdInCache(itemId);
         if (itemModel == null) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "商品信息不存在");
         }
-        UserModel userModel = userService.getUserById(userId);
+        //UserModel userModel = userService.getUserById(userId);
+        UserModel userModel = userService.getUserByIdInCache(userId);
         if (userModel == null) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "用户信息不存在");
         }

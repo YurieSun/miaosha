@@ -5,6 +5,7 @@ import com.yurie.miaosha.error.BusinessException;
 import com.yurie.miaosha.response.CommonReturnType;
 import com.yurie.miaosha.service.CacheService;
 import com.yurie.miaosha.service.ItemService;
+import com.yurie.miaosha.service.PromoService;
 import com.yurie.miaosha.service.model.ItemModel;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +31,9 @@ public class ItemController extends BaseController {
 
     @Autowired
     private CacheService cacheService;
+
+    @Autowired
+    private PromoService promoService;
 
     // 创建商品接口
     @RequestMapping(value = "/create", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
@@ -89,6 +93,14 @@ public class ItemController extends BaseController {
             return itemVO;
         }).collect(Collectors.toList());
         return CommonReturnType.create(itemVOList);
+    }
+
+    // 发布活动接口
+    @RequestMapping(value = "/publishpromo", method = {RequestMethod.GET})
+    @ResponseBody
+    public CommonReturnType publishPromo(@RequestParam(name = "id") Integer id) {
+        promoService.publishPromo(id);
+        return CommonReturnType.create(null);
     }
 
     // itemModel->itemVO

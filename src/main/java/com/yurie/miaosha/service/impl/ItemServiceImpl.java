@@ -14,11 +14,13 @@ import com.yurie.miaosha.validator.ValidationImpl;
 import com.yurie.miaosha.validator.ValidationResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,6 +37,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ValidationImpl validator;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     @Transactional
@@ -73,6 +78,17 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public ItemModel getItemByIdInCache(Integer id) {
+        ItemModel itemModel = (ItemModel) redisTemplate.opsForValue().get("item_validate_" + id);
+        if (itemModel == null) {
+            itemModel = this.getItemById(id);
+            redisTemplate.opsForValue().set("item_validate_" + id, itemModel);
+            redisTemplate.expire("item_validate_" + id, 10, TimeUnit.MINUTES);
+        }
+        return itemModel;
+    }
+
+    @Override
     public List<ItemModel> listItem() {
         List<ItemDO> itemDOList = itemDOMapper.listItem();
         List<ItemModel> itemModelList = itemDOList.stream().map(itemDO -> {
@@ -89,12 +105,18 @@ public class ItemServiceImpl implements ItemService {
         // 这里的sql语句传回来的是所影响的行数，根据是否为0可以判断是否成功。
         // 而采用“for update的sql语句先锁住库存并和amount进行比较，看下是否够扣，如果够再进行更新”的方案，
         // 需要两条sql语句，效率会低一点。
-        int affectedRows = itemStockDOMapper.decreaseStock(itemId, amount);
-        if (affectedRows > 0) {
-            // 扣减库存成功
+//        int affectedRows = itemStockDOMapper.decreaseStock(itemId, amount);
+//        if (affectedRows > 0) {
+//            // 扣减库存成功
+//            return true;
+//        } else {
+//            // 扣减库存失败
+//            return false;
+//        }
+        Long result = redisTemplate.opsForValue().increment("promo_item_stock_" + itemId, amount * (-1));
+        if (result >= 0) {
             return true;
         } else {
-            // 扣减库存失败
             return false;
         }
     }

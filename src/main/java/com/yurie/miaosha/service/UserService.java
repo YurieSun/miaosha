@@ -7,8 +7,13 @@ import com.yurie.miaosha.service.model.UserModel;
 public interface UserService {
     // 通过用户id获取用户对象
     UserModel getUserById(Integer id);
+
+    // 从redis中获取用户信息
+    UserModel getUserByIdInCache(Integer id);
+
     // 用户注册
     UserDO register(UserModel userModel) throws BusinessException;
+
     // 用户登陆
     UserModel validateLogin(String telphone, String encrptPassword) throws BusinessException;
 }
