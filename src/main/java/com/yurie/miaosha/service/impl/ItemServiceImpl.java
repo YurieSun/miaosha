@@ -6,6 +6,7 @@ import com.yurie.miaosha.dataobject.ItemDO;
 import com.yurie.miaosha.dataobject.ItemStockDO;
 import com.yurie.miaosha.error.BusinessException;
 import com.yurie.miaosha.error.EmBusinessError;
+import com.yurie.miaosha.mq.MqProducer;
 import com.yurie.miaosha.service.ItemService;
 import com.yurie.miaosha.service.PromoService;
 import com.yurie.miaosha.service.model.ItemModel;
@@ -40,6 +41,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private MqProducer mqProducer;
 
     @Override
     @Transactional
@@ -113,10 +117,19 @@ public class ItemServiceImpl implements ItemService {
 //            // 扣减库存失败
 //            return false;
 //        }
-        Long result = redisTemplate.opsForValue().increment("promo_item_stock_" + itemId, amount * (-1));
+        Long result = redisTemplate.opsForValue().increment("promo_item_stock_" + itemId, amount.intValue() * (-1));
         if (result >= 0) {
+            // 扣减库存成功，发送消息。
+            boolean mqResult = mqProducer.asyncReduceStock(itemId, amount);
+            if (!mqResult) {
+                // 若消息发送失败，需回滚redis内库存
+                redisTemplate.opsForValue().increment("promo_item_stock_" + itemId, amount.intValue());
+                return false;
+            }
             return true;
         } else {
+            // 扣减库存失败
+            redisTemplate.opsForValue().increment("promo_item_stock_" + itemId, amount.intValue());
             return false;
         }
     }
