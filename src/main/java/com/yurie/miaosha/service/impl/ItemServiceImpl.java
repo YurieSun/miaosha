@@ -124,7 +124,12 @@ public class ItemServiceImpl implements ItemService {
 //            return false;
 //        }
         Long result = redisTemplate.opsForValue().increment("promo_item_stock_" + itemId, amount.intValue() * (-1));
-        if (result >= 0) {
+        if (result > 0) {
+            // 扣减库存成功，发送消息。
+            return true;
+        } else if (result == 0) {
+            // 设置库存售罄标识
+            redisTemplate.opsForValue().set("promo_item_stock_invalid" + itemId, true);
             // 扣减库存成功，发送消息。
             return true;
         } else {
