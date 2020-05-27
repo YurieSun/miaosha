@@ -2,8 +2,10 @@ package com.yurie.miaosha.service.impl;
 
 import com.yurie.miaosha.dao.OrderDOMapper;
 import com.yurie.miaosha.dao.SequenceDOMapper;
+import com.yurie.miaosha.dao.StockLogDOMapper;
 import com.yurie.miaosha.dataobject.OrderDO;
 import com.yurie.miaosha.dataobject.SequenceDO;
+import com.yurie.miaosha.dataobject.StockLogDO;
 import com.yurie.miaosha.error.BusinessException;
 import com.yurie.miaosha.error.EmBusinessError;
 import com.yurie.miaosha.service.ItemService;
@@ -18,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
@@ -40,6 +44,9 @@ public class OrderServiceImpl implements OrderService {
     private SequenceDOMapper sequenceDOMapper;
 
     @Autowired
+    private StockLogDOMapper stockLogDOMapper;
+
+    @Autowired
     private PromoService promoService;
 
     @Autowired
@@ -47,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderModel createOrder(Integer userId, Integer itemId, Integer promoId, Integer amount) throws BusinessException {
+    public OrderModel createOrder(Integer userId, Integer itemId, Integer promoId, Integer amount, String stockLogId) throws BusinessException {
         // 1. 校验下单状态：商品是否存在，用户是否存在，数量是否正确，秒杀活动是否合法
         //ItemModel itemModel = itemService.getItemById(itemId);
         ItemModel itemModel = itemService.getItemByIdInCache(itemId);
@@ -97,6 +104,27 @@ public class OrderServiceImpl implements OrderService {
         orderDOMapper.insertSelective(orderDO);
         // 增加销量
         itemService.increaseSales(itemId, amount);
+
+        // 在事务提交之后执行的操作
+//        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+//            @Override
+//            public void afterCommit() {
+//                boolean mqResult = itemService.asyncDecreaseStock(itemId, amount);
+////                if(!mqResult){
+////                    itemService.increaseStock(itemId,amount);
+////                    throw new BusinessException(EmBusinessError.MQ_SEND_FAIL);
+////                }
+//            }
+//        });
+
+        // 将流水状态转变为下单成功
+        StockLogDO stockLogDO = stockLogDOMapper.selectByPrimaryKey(stockLogId);
+        if (stockLogDO == null) {
+            throw new BusinessException(EmBusinessError.UNKNOWN_ERROR);
+        }
+        stockLogDO.setStatus(2);
+        stockLogDOMapper.updateByPrimaryKeySelective(stockLogDO);
+
         // 4. 返回给前端
         return orderModel;
     }

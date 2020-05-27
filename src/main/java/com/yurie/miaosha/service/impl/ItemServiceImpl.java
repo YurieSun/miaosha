@@ -2,8 +2,10 @@ package com.yurie.miaosha.service.impl;
 
 import com.yurie.miaosha.dao.ItemDOMapper;
 import com.yurie.miaosha.dao.ItemStockDOMapper;
+import com.yurie.miaosha.dao.StockLogDOMapper;
 import com.yurie.miaosha.dataobject.ItemDO;
 import com.yurie.miaosha.dataobject.ItemStockDO;
+import com.yurie.miaosha.dataobject.StockLogDO;
 import com.yurie.miaosha.error.BusinessException;
 import com.yurie.miaosha.error.EmBusinessError;
 import com.yurie.miaosha.mq.MqProducer;
@@ -21,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -32,6 +35,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemStockDOMapper itemStockDOMapper;
+
+    @Autowired
+    private StockLogDOMapper stockLogDOMapper;
 
     @Autowired
     private PromoService promoService;
@@ -120,18 +126,39 @@ public class ItemServiceImpl implements ItemService {
         Long result = redisTemplate.opsForValue().increment("promo_item_stock_" + itemId, amount.intValue() * (-1));
         if (result >= 0) {
             // 扣减库存成功，发送消息。
-            boolean mqResult = mqProducer.asyncReduceStock(itemId, amount);
-            if (!mqResult) {
-                // 若消息发送失败，需回滚redis内库存
-                redisTemplate.opsForValue().increment("promo_item_stock_" + itemId, amount.intValue());
-                return false;
-            }
             return true;
         } else {
             // 扣减库存失败
-            redisTemplate.opsForValue().increment("promo_item_stock_" + itemId, amount.intValue());
+            increaseSales(itemId, amount);
             return false;
         }
+    }
+
+    @Override
+    public boolean asyncDecreaseStock(Integer itemId, Integer amount) {
+        boolean mqResult = mqProducer.asyncReduceStock(itemId, amount);
+        return mqResult;
+    }
+
+    @Override
+    public boolean increaseStock(Integer itemId, Integer amount) {
+        redisTemplate.opsForValue().increment("promo_item_stock_" + itemId, amount.intValue());
+        // 这里不考虑redis操作失败的情况。
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public String initStockLog(Integer itemId, Integer amount) {
+        StockLogDO stockLogDO = new StockLogDO();
+        stockLogDO.setItemId(itemId);
+        stockLogDO.setAmount(amount);
+        stockLogDO.setStockLogId(UUID.randomUUID().toString().replace("-", ""));
+        stockLogDO.setStatus(1);
+
+        stockLogDOMapper.insert(stockLogDO);
+
+        return stockLogDO.getStockLogId();
     }
 
     @Override

@@ -2,7 +2,9 @@ package com.yurie.miaosha.controller;
 
 import com.yurie.miaosha.error.BusinessException;
 import com.yurie.miaosha.error.EmBusinessError;
+import com.yurie.miaosha.mq.MqProducer;
 import com.yurie.miaosha.response.CommonReturnType;
+import com.yurie.miaosha.service.ItemService;
 import com.yurie.miaosha.service.OrderService;
 import com.yurie.miaosha.service.model.OrderModel;
 import com.yurie.miaosha.service.model.UserModel;
@@ -26,7 +28,13 @@ public class OrderController extends BaseController {
     private OrderService orderService;
 
     @Autowired
+    private ItemService itemService;
+
+    @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private MqProducer mqProducer;
 
     // 下单
     @RequestMapping(value = "/createorder", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
@@ -49,11 +57,20 @@ public class OrderController extends BaseController {
         // 从redis中获取UserModel
         UserModel userModel = (UserModel) redisTemplate.opsForValue().get(token);
 
-        if(userModel==null){
+        if (userModel == null) {
             throw new BusinessException(EmBusinessError.USER_NOT_LOGIN, "用户未登陆，不能下单");
         }
 
-        OrderModel orderModel = orderService.createOrder(userModel.getId(), itemId, promoId, amount);
+//        OrderModel orderModel = orderService.createOrder(userModel.getId(), itemId, promoId, amount);
+        // 先生成库存流水
+        String stockLogId = itemService.initStockLog(itemId, amount);
+
+        // 再通过异步消息创建订单
+        boolean result = mqProducer.transactionAsyncReduceStock(userModel.getId(), itemId, promoId, amount, stockLogId);
+        if (!result) {
+            throw new BusinessException(EmBusinessError.UNKNOWN_ERROR, "下单失败");
+        }
+
         return CommonReturnType.create(null);
     }
 }
